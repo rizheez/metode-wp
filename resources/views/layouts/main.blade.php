@@ -14,7 +14,14 @@
     @include('layouts.navbar')
 
     <main class="py-4 container">
-        @yield('main')
+
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Aplikasi Berbasis Metode Weighted Product (WP)</h5>
+                @yield('main')
+
+            </div>
+        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

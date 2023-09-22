@@ -104,7 +104,7 @@ class DataController extends Controller
     public function calculateWP()
     {
         // Langkah 1: Membuat Matriks Keputusan (Tabel I)
-        // Misalnya, Anda mengambil data nilai alternatif dari tabel dataal
+        // mengambil data nilai alternatif dari tabel dataal
         $dataal = DB::table('dataal')->get();
 
         // Langkah 2: Melakukan Normalisasi Bobot (Tabel II)
@@ -125,11 +125,11 @@ class DataController extends Controller
         }
 
         // Langkah 3: Memangkatkan Nilai Alternatif (Tabel III)
-        // Anda perlu menghitung vektor S untuk setiap alternatif dengan bobot yang sudah dinormalisasi
+        // menghitung vektor S untuk setiap alternatif dengan bobot yang sudah dinormalisasi
         $vektorS = [];
 
         foreach ($dataal as $alt) {
-            $s = 1; // Inisialisasi nilai vektor S untuk alternatif ini
+            $s = 1;
 
             foreach ($kriteria as $key => $k) {
                 $s *= round(pow($alt->{$k->kode}, $bobot_normalized[$key]), 4);
@@ -178,8 +178,6 @@ class DataController extends Controller
                     'nama_alternatif' => $nama_alternatif,
                     'ranking' => $ranking + 1,
                     'V' => $nilaiV,
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ]);
                 $ranking++;
             }
@@ -187,9 +185,6 @@ class DataController extends Controller
             echo "Error: " . $e->getMessage() . "\n";
         }
 
-
-
-        // Kembalikan data yang diperlukan ke tampilan Blade
         return view('pages.metodewp', compact(['dataal', 'kriteria', 'vektorS', 'preferensi']));
     }
 
